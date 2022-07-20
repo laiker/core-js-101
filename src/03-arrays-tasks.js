@@ -233,8 +233,12 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  let sum = 0;
+  return arr.map((val) => {
+    sum += val;
+    return sum;
+  });
 }
 
 /**
@@ -457,8 +461,8 @@ function getIdentityMatrix(n) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(/* start, end */) {
-  throw new Error('Not implemented');
+function getIntervalArray(start, end) {
+  return Array(end - start + 1).fill(0).map((v, i) => i + start);
 }
 
 /**
@@ -472,8 +476,9 @@ function getIntervalArray(/* start, end */) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  const uniqueArray = new Set(arr);
+  return Array.from(uniqueArray);
 }
 
 /**
@@ -506,8 +511,14 @@ function distinct(/* arr */) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  const countryMap = new Map();
+  const arValues = array.map(valueSelector);
+  array.map(keySelector).map((v, i) => {
+    const setData = countryMap.has(v) ? countryMap.get(v).concat([arValues[i]]) : [arValues[i]];
+    return countryMap.set(v, setData);
+  });
+  return countryMap;
 }
 
 
@@ -527,7 +538,6 @@ function group(/* array, keySelector, valueSelector */) {
 function selectMany(/* arr, childrenSelector */) {
   throw new Error('Not implemented');
 }
-
 
 /**
  * Returns an element from the multidimensional array by the specified indexes.

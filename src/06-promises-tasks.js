@@ -81,8 +81,8 @@ function processAllPromises(array) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
+function getFastestPromise(array) {
+  return Promise.race(array);
 }
 
 /**
@@ -92,7 +92,7 @@ function getFastestPromise(/* array */) {
  *
  * @param {Promise[]} array
  * @param {Function} action
- * @return {Promise}
+ * @return {function(...[*]): function(*=): *}
  *
  * @example
  *    const promises = [Promise.resolve(1), Promise.resolve(2), Promise.resolve(3)];
